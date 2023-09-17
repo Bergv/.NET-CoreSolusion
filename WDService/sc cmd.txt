@@ -1,0 +1,44 @@
+﻿## 创建服务
+sc.exe create ServiceName  BinPath=C:\xx\ClearFontService\ClearFontService.exe
+ 
+## 启动服务
+sc.exe start ServiceName
+ 
+## 停止服务
+sc.exe stop ServiceName
+ 
+## 删除服务
+sc.exe delete ServiceName
+## 添加服务描述
+sc description ServiceName "描述"
+ 
+## 改变服务的启动方式 手动/自动/禁用 
+sc.exe config ServiceName start= demand/auto/disabled
+
+
+创建安装脚本install.bat
+set serviceName=ServiceName
+set serviceFilePath=C:\xx\ClearFontService\ClearFontService.exe
+set serviceDescription=服务描述
+sc.exe create %serviceName%  BinPath=%serviceFilePath%
+sc.exe config %serviceName%    start=auto  
+sc.exe description %serviceName%  %serviceDescription%
+sc.exe start  %serviceName%
+pause
+
+
+
+卸载服务脚本unstall.bat
+set serviceName=ServiceName
+sc.exe stop   %serviceName% 
+sc.exe delete %serviceName% 
+pause
+
+
+
+
+
+
+
+
+
